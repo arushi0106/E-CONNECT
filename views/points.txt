@@ -1,0 +1,5 @@
+uuid library genearte random id for every room
+ejs embedded javascript
+
+    // res.render('room');
+    // res.status(200).send("Hello wordl");
