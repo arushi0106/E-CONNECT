@@ -2,7 +2,12 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 const { v4: uuidv4 } = require('uuid');
-const io = require('socket.io')(server);
+const port = process.env.PORT || 3000;
+const io = require("socket.io")(server, {
+    cors: {
+      origin: '*'
+    }
+  });
 const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
   debug: true
@@ -14,12 +19,20 @@ app.use(express.static('public'));
 
 app.use('/peerjs', peerServer);
 
+// server.listen(port,async ()=> {
+//   console.log(`running port ${port}`)
+// });
+
+app.get('/home', (req, res) => {
+    res.render('home1');
+})
+
 app.get('/', (req, res) => {
     res.redirect(`/${uuidv4()}`);
 })
 
 app.get('/:room', ( req, res ) => {
-    res.render('room', { roomId: req.params.room });
+    res.render('room1', { roomId: req.params.room });
 })
 
 
@@ -34,4 +47,5 @@ io.on('connection', socket => {
     })
 })
 
-server.listen(3000);
+
+server.listen(port);

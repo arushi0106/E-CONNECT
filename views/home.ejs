@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun()
+        {
+            window.location.href=`/`;
+        }
+        function fun1()
+        {
+            // string in = document.getElementById('joinId').value
+            console.log(document.getElementById('joinId').value);
+            window.location.href=document.getElementById('joinId').value;
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to E-Connet</h1>
+<button id="createRoom" onclick="fun()">create room</button>
+<br><br>
+<input type="text" id="joinId">
+<button onclick="fun1()">Join room</button>  
+</body>
+</html>

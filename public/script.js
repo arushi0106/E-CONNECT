@@ -2,9 +2,11 @@ const socket = io('/');
 const videoGrid = document.getElementById('video-grid');
 console.log(videoGrid)
 var myvideo = document.createElement('video');
-myvideo.muted = true
 
-// console.log(myvideo);
+
+myvideo.muted = true
+// import Peer from 'peerjs';
+console.log(myvideo);
 const peer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
@@ -26,6 +28,7 @@ navigator.mediaDevices.getUserMedia({
     audio: false
 }).then(stream => {
     myVideoStream = stream;
+    // window.stream = stream;
     addVideoStream(myvideo, stream)
 
     peer.on('call', call => {
@@ -62,6 +65,7 @@ const connectToNewUser = (userId, stream) => {
 function addVideoStream(video, stream) {
     console.log('haha');
     video.srcObject = stream;
+    // window.stream = stream;
     video.addEventListener('loadedmetadata', () => {
         video.play();
     })
