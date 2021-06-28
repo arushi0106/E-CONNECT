@@ -9,22 +9,23 @@ const io = require("socket.io")(server, {
     }
   });
 const { ExpressPeerServer } = require('peer');
+const { disconnect } = require('process');
 const peerServer = ExpressPeerServer(server, {
   debug: true
 });
 
-
+const UniId={};
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.use('/peerjs', peerServer);
 
-// server.listen(port,async ()=> {
-//   console.log(`running port ${port}`)
-// });
+let count=0;
+
+
 
 app.get('/home', (req, res) => {
-    res.render('home1');
+    res.render('home');
 })
 
 app.get('/', (req, res) => {
@@ -32,17 +33,25 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:room', ( req, res ) => {
-    res.render('room1', { roomId: req.params.room });
+    res.render('room', { roomId: req.params.room ,count});
 })
 
 
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
+      count++;
         console.log("join room with");
         console.log(roomId);
         console.log(userId);
         socket.join(roomId);
+        console.log(count);
         socket.to(roomId).emit('user-connected',userId);
+         
+        
+          socket.on('disconnect', () => {
+            count--;
+            socket.to(roomId).emit('user-disconnected', userId)
+          })
         
     })
 })
