@@ -38,16 +38,18 @@ app.get('/:room', ( req, res ) => {
 
 
 io.on('connection', socket => {
-    socket.on('join-room', (roomId, userId) => {
+    socket.on('join-room', (roomId, userId, name) => {
       count++;
         console.log("join room with");
         console.log(roomId);
         console.log(userId);
         socket.join(roomId);
         console.log(count);
-        socket.to(roomId).emit('user-connected',userId);
+        socket.to(roomId).emit('user-connected',userId, name);
          
-        
+        socket.on('chat-message',(roomId, msg, name)=>{
+          socket.to(roomId).emit('msg-recieved', msg, name );
+        })
           socket.on('disconnect', () => {
             count--;
             socket.to(roomId).emit('user-disconnected', userId)

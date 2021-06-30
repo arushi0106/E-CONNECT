@@ -100,3 +100,7 @@ display: flex;
 justify-content: center;
 flex-wrap: wrap;
 }
+
+.messages {
+    color: #050404;
+}

@@ -1,8 +1,8 @@
 const socket = io('/');
 const videoGrid = document.getElementById('video-grid');
 
-var myname = document.createElement('div');
-myname.innerHTML=person;
+// var myname = document.createElement('div');
+// myname.innerHTML=person;
 
 // const title=[];
 
@@ -19,7 +19,7 @@ var myvideo = document.createElement('video');
 // }
 
 
-// myvideo.muted = true
+myvideo.muted = true
 // import Peer from 'peerjs';
 console.log(myvideo);
 const peer = new Peer(undefined, {
@@ -32,10 +32,11 @@ const peer = new Peer(undefined, {
 const peers = {};
 
 let myVideoStream
-
+let myname;
 peer.on('open', id => {
     console.log(id);
-    socket.emit('join-room', ROOM_ID, id);
+     myname = prompt("Please enter your name", "Tony Stark");
+    socket.emit('join-room', ROOM_ID, id, myname);
 })
 
 navigator.mediaDevices.getUserMedia({
@@ -44,20 +45,32 @@ navigator.mediaDevices.getUserMedia({
 }).then(stream => {
     myVideoStream = stream;
     // window.stream = stream;
-    addVideoStream(myvideo, stream)
-
-    peer.on('call', call => {
+    addVideoStream(myvideo, stream, myname)
+   let userVideoStream1;
+    peer.on('call', (call) => {
         console.log("hello");
         call.answer(stream)
-        const video = document.createElement('video')
+        // const video = document.createElement('video')
         call.on('stream', userVideoStream => {
             console.log("hello");
-          addVideoStream(video, userVideoStream)
+            userVideoStream1=userVideoStream
+          // addVideoStream(video, userVideoStream, username)
         })
       })
-    
-    socket.on('user-connected', (userId) => {
-        connectToNewUser(userId,stream);
+     
+      peer.on('connection', function(conn){
+        console.log("connectid");
+        conn.on('open', function(){
+          conn.on('data', function(data) {
+            console.log('Received', data);
+            const video = document.createElement('video')
+             addVideoStream(video, userVideoStream1, data);
+        });
+      });
+    });
+   
+    socket.on('user-connected', (userId, username) => {
+        connectToNewUser(userId,stream, username);
     })
    
     socket.on('user-disconnected', (userId) => {
@@ -69,14 +82,21 @@ navigator.mediaDevices.getUserMedia({
 
 
 
-const connectToNewUser = (userId, stream) => {
+const connectToNewUser = (userId, mystream, username) => {
     console.log("new user");
+    console.log(username);
     console.log(userId);
-    const call = peer.call(userId, stream);
+    const call = peer.call(userId, mystream);
     console.log(call)
     const video = document.createElement('video');
-    call.on('stream', userVideoStream => { 
-        addVideoStream(video, userVideoStream);
+    call.on('stream', (userVideoStream) => { 
+        addVideoStream(video, userVideoStream, username);
+    })
+    var conn= peer.connect(userId);
+    console.log(conn);
+    conn.on('open',function(){
+      conn.send(myname);
+      console.log(myname);
     })
 
     call.on('close', () => {
@@ -87,15 +107,19 @@ const connectToNewUser = (userId, stream) => {
       peers[userId] = call
 }
 
-function addVideoStream(video, stream) {
+function addVideoStream(video, stream, name) {
     // console.log('haha');
     video.srcObject = stream;
     // window.stream = stream;
     video.addEventListener('loadedmetadata', () => {
         video.play();
     })
-    videoGrid.append(myname);
-    myname.append(video);
+    videoGrid.append(video);
+  let nm=  document.createElement('h1');
+  nm.innerHTML=name;
+  videoGrid.append(nm);
+
+    // myname.append(video);
 }
 
 function leave()
@@ -163,4 +187,26 @@ function stopVideo()
     <span>Video</span>
   `
   document.querySelector('.videobutton').innerHTML = html;
+}
+
+function sendMessage()
+{
+  var msg=document.getElementById('chat_message').value;
+  console.log(msg);
+  document.getElementById('chat_message').value='';
+  $("ul").append(`<li class="messages list-group-item active"><b>You</b><br/>${msg}</li>`);
+    socket.emit('chat-message', ROOM_ID ,msg ,myname);
+  
+}
+
+socket.on('msg-recieved',(msg,username)=>{
+  console.log(msg);
+  console.log(username);
+  $("ul").append(`<li class="messages list-group-item"><b>${username}</b><br/>${msg}</li>`);
+  scrollToBottom()
+})
+
+const scrollToBottom = () => {
+  var d = $('.main__chat_window');
+  d.scrollTop(d.prop("scrollHeight"));
 }
