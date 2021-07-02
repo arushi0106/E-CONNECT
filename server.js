@@ -24,11 +24,11 @@ let count=0;
 
 
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/', (req, res) => {
+app.get('/call', (req, res) => {
     res.redirect(`/${uuidv4()}`);
 })
 

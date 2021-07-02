@@ -19,12 +19,12 @@ var myvideo = document.createElement('video');
 // }
 
 
-// myvideo.muted = true
+myvideo.muted = true;
 // import Peer from 'peerjs';
 console.log(myvideo);
 const peer = new Peer(undefined, {
   path: '/peerjs',
-  host: '/',
+  host: 'quiet-cliffs-61940.herokuapp.com',
   port: '443',
   // secure: true
 });
@@ -164,7 +164,7 @@ function playVideo() {
 function stopVideo() {
   const html = `
     <i class="fas fa-video-camera-slash"></i>
-    <span>Video off</span>
+    <span>Video</span>
   `
   document.querySelector('.videobutton').innerHTML = html;
 }
