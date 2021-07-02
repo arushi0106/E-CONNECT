@@ -19,7 +19,7 @@ var myvideo = document.createElement('video');
 // }
 
 
-myvideo.muted = true;
+// myvideo.muted = true;
 // import Peer from 'peerjs';
 console.log(myvideo);
 const peer = new Peer(undefined, {
