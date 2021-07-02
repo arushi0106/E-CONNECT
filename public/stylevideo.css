@@ -78,22 +78,31 @@ background-color: #f6484a;
 .main__right {
 flex: 0.3;
 background-color: #242f41;
+overflow:auto;
 }
 .main__chat_window {
 flex-grow: 1;
+overflow-y: 1;
 }
 .main__message_container {
-padding: 1rem;
+/* padding: 1rem;
 display: flex;
 align-items: center;
 justify-content: center;
+} */
+padding: 22px 12px;
+    display: flex;
 }
 .main__message_container > input {
-height: 50px;
+    flex-grow: 1;
+/* height: 50px;
 flex: 1;
 border-radius: 5px;
 padding-left: 20px;
-border: none;
+border: none; */
+background-color: transparent;
+    border: none;
+    color: #F5F5F5;
 }
 #video-grid {
 display: flex;
@@ -102,5 +111,5 @@ flex-wrap: wrap;
 }
 
 .messages {
-    color: #050404;
+    color:#1d2124;
 }
