@@ -17,13 +17,12 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
-  <title>Home</title>
+  <title>Room</title>
   <script>
     // var person = prompt("Please enter your name", "Tony Stark");
   </script>
   <script>
     const ROOM_ID = "<%= roomId %>"
-    let count = "<%= count%>"
   </script>
   <script src="socket.io/socket.io.js"></script>
   <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js" defer></script>
@@ -32,9 +31,11 @@
 <body>
   <div class="header">
     <div class="logo">
-      <h2 id="MeetTitle"></h2>
+      <h2 id="MeetTitle" > Meeting</h2>
     </div>
+    
   </div>
+
   <div class="main">
     <div class="main__left">
       <div class="videos__group">
@@ -51,7 +52,7 @@
           </div>
         </div>
         <div class="options__right" onclick="leave()">
-          <button type="button" class="btn btn-danger" onclick="leave()">LEAVE</button>
+          <button type="button" class="btn btn-danger" onclick="leave()">Leave</button>
 
         </div>
       </div>
