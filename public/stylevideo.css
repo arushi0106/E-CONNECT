@@ -16,7 +16,7 @@ justify-content: center;
 align-items: center;
 height: 8vh;
 width: 100%;
-background-color: #161d29;
+background-color: #1d2124;
 }
 .logo > h3 {
 color: #eeeeee;
@@ -37,7 +37,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 padding: 1rem;
-background-color: #161d29;
+background-color:#1d2124;
 }
 video {
 height: 300px;
@@ -52,7 +52,7 @@ transform: rotateY(180deg);
 .options {
 padding: 1rem;
 display: flex;
-background-color: #1d2635;
+background-color: #1d2124;
 }
 .options__left {
 display: flex;
@@ -77,12 +77,12 @@ background-color: #f6484a;
 }
 .main__right {
 flex: 0.3;
-background-color: #242f41;
+background-color: #091324;
 overflow:auto;
 }
 .main__chat_window {
 flex-grow: 1;
-overflow-y: 1;
+overflow-y: auto;
 }
 .main__message_container {
 /* padding: 1rem;
@@ -100,9 +100,9 @@ flex: 1;
 border-radius: 5px;
 padding-left: 20px;
 border: none; */
-background-color: transparent;
+background-color: white;
     border: none;
-    color: #F5F5F5;
+    color: #020101;
 }
 #video-grid {
 display: flex;
@@ -111,5 +111,13 @@ flex-wrap: wrap;
 }
 
 .messages {
-    color:#1d2124;
+    color:#050607;
+}
+
+#chat_message{
+padding: 10px;
+}
+
+#MeetTitle{
+    color: white;
 }

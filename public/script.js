@@ -12,7 +12,6 @@ console.log(myvideo);
 
 const peer = new Peer(undefined, {
   path: '/peerjs',
-  
   host: 'quiet-cliffs-61940.herokuapp.com',
   port: '443',
   // secure: true
