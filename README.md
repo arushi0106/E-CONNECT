@@ -10,7 +10,7 @@
 
  
 ## Demo Video Link:
- <a href="https://youtu.be/-qk0M5QOg4s"> E-Connect_DemoVideo </a>
+ <a href="https://youtu.be/Z4HAP6i0Wos"> E-Connect_DemoVideo </a>
  
  ## Live URL:
  <a href="https://quiet-cliffs-61940.herokuapp.com/home"> E-Connect_Home </a>
