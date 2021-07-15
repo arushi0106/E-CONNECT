@@ -51,9 +51,10 @@
 * E-CONNECT $ nodemon server.js
  
 
-## <a name="contributors"></a>Contributors:
+## <a name="contributors"></a>Credit:
 
 * [Arushi Agarwal](https://github.com/arushi0106)
+* Kushal Agarwal (Mentor)
 
 
 # <a name="images"></a>Images
